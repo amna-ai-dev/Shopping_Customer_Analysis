@@ -1,0 +1,35 @@
+print("Shopping Customer Analysis")
+print("My second Python project!")
+print("Let's analyze shopping data.")
+import pandas as pd
+
+print(pd.__version__)
+data = {"Customer": ["Ali", "Sara", "Ahmed", "Ayesha", "Usman"], "Amount": [1200, 2500, 800, 3000, 1500]}
+df = pd.DataFrame(data)
+print(df)
+print("Total Sales:", df["Amount"].sum())
+print("Average Spending:", df["Amount"].mean())
+print("Highest Spending:", df["Amount"].max())
+print("Number of Customers:", len(df))
+print(df.sort_values(by="Amount", ascending=False))
+print("Lowest Spending:", df["Amount"].min())
+df["Category"] = df["Amount"].apply(
+    lambda x: "High" if x >= 2000 else "Low"
+)
+print(df)
+print(df["Category"].value_counts())
+import matplotlib.pyplot as plt
+plt.bar(df["Customer"], df["Amount"])
+plt.title("Customer Shopping Analysis")
+plt.xlabel("Customer")
+plt.ylabel("Shopping Amount")
+plt.show()
+df.to_csv("shopping_data.csv", index=False)
+print("Customers sorted by spending:")
+print(df.sort_values(by="Amount", ascending=False))
+print("Lowest Spending:", df["Amount"].min())
+print("Total Customers:", df["Customer"].count()) 
+print("Highest Spending Customer:")
+print(df.loc[df["Amount"].idxmax(), "Customer"])
+print("Lowest Spending Customer:")
+print(df.loc[df["Amount"].idxmin(), "Customer"])
